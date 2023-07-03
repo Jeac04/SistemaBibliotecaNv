@@ -12,14 +12,18 @@ from django.http import HttpResponse
 def signup(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
+        
         if form.is_valid():
             user = form.save()
-            messages.success(request, "Has creado tu cuenta")
+            messages.success(request, "Has creado tu cuenta exitosamente.")
             
             group = Group.objects.get(name='Usuarios')
             user.groups.add(group)
             
-            return redirect('/login')
+            return render(request, 'singup.html', {'form': form})
+  # Cambia '/login' por el nombre de la URL si tienes una configurada en tu proyecto
+        print(form.error_messages)
+        print(form.data)
     else:
         form = RegistroForm()
     

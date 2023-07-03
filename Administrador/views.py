@@ -19,13 +19,13 @@ def Panel_Administrador(request):
             
             Usuario.objects.create(username=username, nombre=nombre, carrera=carrera, grupo=grupo, turno=turno,
                                    cuatrimestre=cuatrimestre, email=email, password=password)
-            return redirect('/PanelAdministrador')
+            return redirect('/panel')
 
         # Eliminar usuario
         elif 'eliminar-usuario' in request.POST:
             usuario_id = request.POST['eliminar-usuario']
             Usuario.objects.filter(id=usuario_id).delete()
-            return redirect('/PanelAdministrador')
+            return redirect('/panel')
 
         # Añadir libro
         elif 'txtCodigo' in request.POST:
@@ -43,7 +43,7 @@ def Panel_Administrador(request):
             Libro.objects.create(Codigo=Codigo, Isbn=Isbn, Nombre=Nombre, Ejemplares=Ejemplares, Paginas=Paginas,
                                  Autor=Autor, Editorial=Editorial, Edicion=Edicion, Ingenieria=Ingenieria,
                                  Descripcion=Descripcion)
-            return redirect('/PanelAdministrador')
+            return redirect('/libros')
 
         # Eliminar libro
         elif 'eliminar-libro' in request.POST:
@@ -84,7 +84,7 @@ def Panel_Administrador(request):
             libro.Ingenieria = Ingenieria
             libro.Descripcion = Descripcion
             libro.save()
-            return redirect('/PanelAdministrador')
+            return redirect('/panel')
 
     # Obtener datos para mostrar en la vista
     usuariosregistrados = Usuario.objects.all()
