@@ -1,0 +1,64 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div align="center">
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>{{user.nombre}}</h1>
+    </div>
+    <p class="p-3 mb-2 bg-body-secondary">
+        <h2>Matrícula: {{user.username}}</h2>
+    </p>
+    <p class="p-3 mb-2 bg-body-secondary">
+        <h2>Cuatrimestre: {{user.cuatrimestre}}{{user.grupo}}</h2>
+    </p>
+    <p class="p-3 mb-2 bg-body-secondary">
+        <h2>{{user.carrera}}</h2>
+    </p>
+    <p class="p-3 mb-2 bg-body-secondary">
+      <h2>{{ user.email }}</h2>
+  </p>
+</div>
+
+<div class="p-3 mb-2 bg-dark text-white">
+    <div align="center">
+      <h3>Historial</h3>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Folio</th>
+        <th scope="col">Titulo del Libro</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Fecha de Prestamo</th>
+        <th scope="col">Fecha de Devolución</th>
+        <th scope="col">Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in papeleta %}
+          <tr>
+            <td>{{p.folio}}</td>
+            <td>{{p.nombre_solicitante}}</td>
+            <td>{{p.matricula}}</td>
+            <td>{{p.ingenieria}}</td>
+            <td>{{p.titulo}}</td>
+            <td>{{p.fecha_prestamo}}</td>
+            <td>{{p.fecha_devolucion}}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+{% else %}
+<p>Please login to see user detail.</p>
+{% endif %}
+
+
+
+{% endblock  %}

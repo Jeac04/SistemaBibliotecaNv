@@ -1,0 +1,80 @@
+{% include "navadmin.html" %}
+
+{% block content %}
+
+<div align="center">
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>EDITAR LIBRO</h1>
+    </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <form action="/edicionLibro" method="POST">{% csrf_token %}
+        <input type="hidden" name="id" value="{{libro.id}}">
+      <div class="row">
+        <div class="col-2">
+          <label class="form-label" for="form3Example1c">Código</label>
+          <input type="text" name="txtCodigo" value="{{libro.Codigo}}" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Isbn</label>
+          <input type="text" name="txtIsbn" value="{{libro.Isbn}}" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Nombre</label>
+          <input type="text" name="txtNombre" value="{{libro.Nombre}}" class="form-control">
+        </div>      
+        <div class="col-md-1">
+          <label for="" class="form-label">Ejemplares</label>
+          <input type="text" name="txtEjemplares" value="{{libro.Ejemplares}}" class="form-control">
+        </div>
+        <div class="col-md-1">
+          <label for="" class="form-label">Páginas</label>
+          <input type="text" name="txtPaginas" value="{{libro.Paginas}}" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Autor</label>
+          <input type="text" name="txtAutor" value="{{libro.Autor}}" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Editorial</label>
+          <input type="text" name="txtEditorial" value="{{libro.Editorial}}" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <label for="" class="form-label">Edición</label>
+          <input type="text" name="txtEdicion" value="{{libro.Edicion}}" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="form3Example1c">Ingeniería</label>
+          <select id="text" name="txtIngenieria" class="form-select">
+            <option selected>{{libro.Ingenieria}}</option>
+            <option>Ciencias Básicas</option>
+            <option>Inglés</option>
+            <option>Ingeniería en Software</option>
+            <option>Ingeniería en Sistemas Automotrices</option>
+            <option>Ingeniería en Animación y Efectos Visuales</option>
+            <option>Ingeniería Financiera</option>
+            <option>Ingeniería Mecatrónica</option>
+            <option>Ingeniería  Logistica y Transporte</option>
+            <option>Ingeniería en Nanotecnología</option>
+            <option>Ingeniería en Tecnología Ambiental</option>
+            <option>Ingeniería en Energía</option>
+            <option>Ingeniería Agroindustrial</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+        <label for="" class="form-label">Descripción</label>
+        <input type="text" name="txtDescripcion" value="{{libro.Descripcion}}" class="form-control">
+      </div>
+      </div>
+      
+      <div class="p-3 mb-2 bg-transparent text-body"></div>
+        <div align="center">
+          <input type="submit" value="Editar Libro" name="Crear Libro">
+        </div>
+      </div>
+    </form>
+
+{% endblock %}

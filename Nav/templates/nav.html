@@ -1,0 +1,44 @@
+{% block content %}
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand"><img src="{% static 'img/nav3.png' %}"  width="100%" height="50"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Consultar Libros
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/cienciasbasicas">Ciencias Básicas</a></li>
+                     <li><a class="dropdown-item" href="/ingles">Inglés</a></li>
+                    <li><a class="dropdown-item" href="/software">Ingeniería de Software</a></li>
+                    <li><a class="dropdown-item" href="/nanotecnologia">Ingeniería en Nanotecnología</a></li>
+                    <li><a class="dropdown-item" href="/logisticaytransporte">Ingeniería en Logistica y Transporte</a></li>
+                    <li><a class="dropdown-item" href="/mecatronica">Ingeniería en Mecatronica</a></li>
+                    <li><a class="dropdown-item" href="/sistemasautomotirces">Ingeniería en Sistemas Automotrices</a></li>
+                    <li><a class="dropdown-item" href="/energia">Ingeniería en Energía</a></li>
+                    <li><a class="dropdown-item" href="/financiera">Ingeniería Financiera</a></li>
+                    <li><a class="dropdown-item" href="/animacionyefectosvisuales">Ingeniería en Animación y Efectos Visuales</a></li>
+                    <li><a class="dropdown-item" href="/tecnologiaambiental">Ingeniería en Tecnología Ambiental</a></li>
+                    <li><a class="dropdown-item" href="/agroindustrial">Ingeniería Agroindustrial</a></li>
+                  </ul>
+                </li>        
+                <li class="nav-item">
+                  <a class="nav-link active" href="/perfil">Perfil</a>
+                </li>
+              </ul>
+              <li class="nav-item">
+                <a class="btn btn-secondary" href="/logout" role="button">Cerrar Sesión</a>
+              </li>
+            </div>
+    </div>
+</nav>
+{% endblock content %}

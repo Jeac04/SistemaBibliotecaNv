@@ -1,0 +1,43 @@
+{% include "navadmin.html" %}
+
+{% block content %}
+
+<div align="center">
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>CONTROL DE PRESTAMOS</h1>
+    </div>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Folio</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre del Solicitante</th>
+        <th scope="col">Matricula</th>
+        <th scope="col">Ingenieria</th>
+        <th scope="col">Titulos</th>
+        <th scope="col">Fecha de Préstamo</th>
+        <th scope="col">Fecha de Devolución</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in prestamo %}
+          <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.folio}}</td>
+            <td>{{p.nombre_solicitante}}</td>
+            <td>{{p.matricula}}</td>
+            <td>{{p.ingenieria}}</td>
+            <td>{{p.titulo}}</td>
+            <td>{{p.fecha_prestamo}}</td>
+            <td>{{p.fecha_devolucion}}</td>
+            <td><a href="{% url 'eliminarPrestamo' id=p.id %}" class="btn btn-sm btn-danger">Eliminar</a></td>
+            <td><a href="" class="btn btn-sm btn-primary">Entregado</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+
+{% endblock  %}

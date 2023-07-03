@@ -1,0 +1,127 @@
+{% include "navadmin.html" %}
+
+{% block content %}
+
+<div align="center">
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>REGISTRAR USUARIOS</h1>
+    </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <form action="/registrarUsuario" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-2">
+          <label class="form-label" for="form3Example1c">Matrícula</label>
+          <input type="text" name="txtMatricula" class="form-control">
+        </div>
+        <div class="col-4">
+          <label class="form-label" for="form3Example1c">Nombre</label>
+          <input type="text" name="txtNombre" class="form-control">
+        </div>
+        <div class="col-3">
+          <label class="form-label" for="form3Example1c">Carrera</label>
+          <select id="txtCarrera" name="txtCarrera" class="form-select">
+            <option selected>Elegir...</option>
+            <option>Ingeniería en Software</option>
+            <option>Ingeniería en Sistemas Automotrices</option>
+            <option>Ingeniería en Animación y Efectos Visuales</option>
+            <option>Ingeniería Financiera</option>
+            <option>Ingeniería Mecatrónica</option>
+            <option>Ingeniería Logistica y Transporte</option>
+            <option>Ingeniería en Nanotecnología</option>
+            <option>Ingeniería en Tecnología Ambiental</option>
+            <option>Ingeniería en Energía</option>
+            <option>Ingeniería Agroindustrial</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label class="form-label" for="form3Example1c">Cuatrimestre</label>
+          <select id="txtCuatrimestre" name="txtCuatrimestre" class="form-select">
+            <option selected>Elegir...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+        <div class="col-1">
+          <label class="form-label" for="form3Example1c">Grupo</label>
+          <select id="txtGrupo" name="txtGrupo" class="form-select">
+            <option selected>Elegir...</option>
+            <option>A</option>
+            <option>B</option>
+          </select>
+        </div>
+        <div class="col-1">
+          <label class="form-label" for="form3Example1c">Turno</label>
+          <select id="txtTurno" name="txtTurno" class="form-select">
+            <option selected>Elegir...</option>
+            <option>Matutino</option>
+            <option>Vespertino</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label class="form-label" for="form3Example1c">Correo</label>
+          <input type="text" name="txtCorreo" class="form-control">
+        </div>
+        <div class="col-3">
+          <label class="form-label" for="form3Example1c">Contraseña</label>
+          <input type="password" name="txtpassword" class="form-control">
+        </div>
+        <div>  
+      </div>
+      <div class="p-3 mb-2 bg-transparent text-body"></div>
+      <div align="center">
+        <input type="submit" value="Registrar Alumno" name="Crear Usuario">
+      </div>
+    </form>
+  </div>
+</div>
+<div align="center">
+  <div class="p-3 mb-2 bg-success text-white">
+      <h1>USUARIOS REGISTRADOS</h1>
+  </div>
+</div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Matrícula</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Carrera</th>
+        <th scope="col">Grupo</th>
+        <th scope="col">Turno</th>
+        <th scope="col">Cuatrimestre</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in usuarios %}
+      <tr>
+        <td>{{u.username}}</td>
+        <td>{{u.nombre}}</td>
+        <td>{{u.carrera}}</td>
+        <td>{{u.grupo}}</td>
+        <td>{{u.turno}}</td>
+        <td>{{u.cuatrimestre}}</td>
+        <td><a href="{% url 'eliminarUsuario' id=u.id %}" class="btn btn-sm btn-danger">Eliminar</a></td>
+
+
+      </tr>
+  </tbody>
+    {% endfor %}
+
+      
+    </tbody>
+  </table>
+
+{% endblock  %}

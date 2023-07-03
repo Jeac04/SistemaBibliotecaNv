@@ -1,0 +1,126 @@
+{% include "navadmin.html" %}
+
+{% block content %}
+
+<div align="center">
+    <div class="p-3 mb-2 bg-transparent text-body"></div>
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>AÑADIR LIBRO</h1>
+    </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <form action="/anadirLibro" method="POST">{% csrf_token %}
+      <div class="row">
+        <div class="col-2">
+          <label class="form-label" for="form3Example1c">Código</label>
+          <input type="text" name="txtCodigo" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Isbn</label>
+          <input type="text" name="txtIsbn" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Nombre</label>
+          <input type="text" name="txtNombre" class="form-control">
+        </div>      
+        <div class="col-md-1">
+          <label for="" class="form-label">Ejemplares</label>
+          <input type="text" name="txtEjemplares" class="form-control">
+        </div>
+        <div class="col-md-1">
+          <label for="" class="form-label">Páginas</label>
+          <input type="text" name="txtPaginas" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Autor</label>
+          <input type="text" name="txtAutor" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="" class="form-label">Editorial</label>
+          <input type="text" name="txtEditorial" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <label for="" class="form-label">Edición</label>
+          <input type="text" name="txtEdicion" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="form3Example1c">Ingeniería</label>
+          <select id="text" name="txtIngenieria" class="form-select">
+            <option selected>Elegir...</option>
+            <option>Ciencias Básicas</option>
+            <option>Inglés</option>
+            <option>Ingeniería en Software</option>
+            <option>Ingeniería en Sistemas Automotrices</option>
+            <option>Ingeniería en Animación y Efectos Visuales</option>
+            <option>Ingeniería Financiera</option>
+            <option>Ingeniería Mecatrónica</option>
+            <option>Ingeniería  Logistica y Transporte</option>
+            <option>Ingeniería en Nanotecnología</option>
+            <option>Ingeniería en Tecnología Ambiental</option>
+            <option>Ingeniería en Energía</option>
+            <option>Ingeniería Agroindustrial</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+        <label for="" class="form-label">Descripción</label>
+        <input type="text" name="txtDescripcion" class="form-control">
+      </div>
+      </div>
+      
+      <div class="p-3 mb-2 bg-transparent text-body"></div>
+        <div align="center">
+          <input type="submit" value="Registrar Libro" name="Crear Libro">
+        </div>
+      </div>
+    </form>
+<div align="center">
+  <div class="p-3 mb-2 bg-success text-white">
+    <h1>LIBROS EN INVENTARIO</h1>
+  </div>
+</div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Isbn</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Ejemplares</th>
+        <th scope="col">Páginas</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Editorial</th>
+        <th scope="col">Edición</th>
+        <th scope="col">Ingeniería</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="col-md-4">
+        <form action="/buscarLibro/" method="POST">
+          {% csrf_token %}
+          <label for="codigo">Código del libro:</label>
+          <input type="text" id="codigo" name="codigo">
+          <input type="submit" value="Buscar">
+        </form>
+      </div>
+        {% for l in libros %}
+          <tr>
+            <td>{{l.Codigo}}</td>
+            <td>{{l.Isbn}}</td>
+            <td>{{l.Nombre}}</td>
+            <td>{{l.Ejemplares}}</td>
+            <td>{{l.Paginas}}</td>
+            <td>{{l.Autor}}</td>
+            <td>{{l.Editorial}}</td>
+            <td>{{l.Edicion}}</td>
+            <td>{{l.Ingenieria}}</td>
+            <td><a href="{% url 'editarLibro' id=l.id %}" class="btn btn-sm btn-primary">Editar</a></td>
+            <td><a href="{% url 'eliminarLibro' id=l.id %}" class="btn btn-sm btn-danger">Eliminar</a></td>
+          </tr>
+      </tbody>
+        {% endfor %}
+
+    </table>
+
+{% endblock  %}

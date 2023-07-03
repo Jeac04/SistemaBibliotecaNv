@@ -1,0 +1,91 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content  %}
+
+<div class="p-3 mb-2 bg-transparent text-body"></div>
+<div class="p-3 mb-2 bg-transparent text-body"></div>
+<div class="p-3 mb-2 bg-body-secondary">
+  <div align="center">
+    <h3>Papeleta de Prestamo</h3>
+  </div>
+</div>
+<form action="/registrarPapeleta" method="POST">{% csrf_token %}
+  <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+    <div class="row">
+      <div class="col-md-2">
+        <label for="inputEmail4" class="form-label">Folio</label>
+        <input value="{{codigo}}" name="txtFolio" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-11">
+        <label for="inputAddress" class="form-label">Nombre del Solicitante</label>
+        <input value="{{user.nombre}}" name="txtNombre" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Matrícula</label>
+        <input value="{{user.username}}" name="txtMatricula" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Ingeniería</label>
+        <input value="{{user.carrera}}" name="txtIngenieria" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Cuatrimestre</label>
+        <input value="{{user.cuatrimestre}}" name="txtCuatrimestre" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Turno</label>
+        <input value="{{user.turno}}" name="txtTurno" readonly="readonly" class="form-control"></input>
+      </div>
+      <div class="col-md-2">
+        <label for="inputState" class="form-label">Rol</label>
+        <select id="inputState" name="txtRol" class="form-select">
+          <option selected>Elegir...</option>
+          <option>Estudiante</option>
+          <option>P.A</option>
+          <option>P.T.C</option>
+        </select>
+      </div>
+      <div class="p-3 mb-2 bg-transparent text-body"></div>
+    </div>
+  <div class="p-3 mb-2 bg-dark text-white">
+    <div align="center">
+      <h3>Datos del libro</h3>
+    </div>
+  </div>
+  <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+    <div class="row">
+      <div class="col-md-2">
+        <label for="inputEmail4" class="form-label">Código Interno</label>
+        <input type="text" value="{{libro.Codigo}}" name="txtCodigo" readonly="readonly" class="form-control">
+      </div>
+      <div class="col-5">
+        <label for="inputAddress" class="form-label"> Título</label>
+        <input type="text" value="{{libro.Nombre}}" name="txtTitulo" readonly="readonly" class="form-control">
+      </div>
+      <div class="col-5">
+        <label for="inputAddress2" class="form-label">Autor</label>
+        <input type="text" value="{{libro.Autor}}" name="txtAutor" readonly="readonly" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Fecha de Préstamo:</label>
+        <input type="text" value="{{fecha_actual}}" name="txtFechaprestamo" readonly="readonly" class="form-control">
+      </div> 
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Fecha de Devolución:</label>
+        <input type="text"  value="{{fechaDevolucion}}" name="txtFechadevolucion" readonly="readonly" class="form-control">
+      </div>
+      <div class="p-3 mb-2 bg-transparent text-body"></div>
+      <div class="form-floating">
+        <label for="floatingTextarea2">Observaciones</label>
+        <textarea class="form-control" name="txtObservaciones" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+      </div>
+      <div class="p-1 mb-2 bg-transparent text-body"></div>
+      <div align="center" class="col-12">
+        <input type="submit" value="Generar Papeleta" name="Crear Papeleta">
+      </div>
+    </div>
+</form>
+</div>
+
+
+{% endblock  %}
