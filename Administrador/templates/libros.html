@@ -41,8 +41,20 @@
           <input type="text" name="txtEditorial" class="form-control">
         </div>
         <div class="col-md-2">
-          <label for="" class="form-label">Edición</label>
-          <input type="text" name="txtEdicion" class="form-control">
+          <label class="form-label" for="form3Example1c">Edición</label>
+          <select id="text" name="txtEdicion" class="form-select">
+            <option selected>Elegir...</option>
+            <option>Primera Edición</option>
+            <option>Segunda Edición</option>
+            <option>Tercera Edición</option>
+            <option>Cuarta Edición</option>
+            <option>Quinta Edición</option>
+            <option>Sexta Edición</option>
+            <option>Séptima Edición</option>
+            <option>Octava Edición</option>
+            <option>Novena Edición</option>
+            <option>Décima Edición</option>
+          </select>
         </div>
         <div class="col-md-6">
           <label class="form-label" for="form3Example1c">Ingeniería</label>
@@ -79,7 +91,6 @@
     <h1>LIBROS EN INVENTARIO</h1>
   </div>
 </div>
-
   <table class="table">
     <thead>
       <tr>
@@ -96,14 +107,26 @@
       </tr>
     </thead>
     <tbody>
-      <div class="col-md-4">
-        <form action="/buscarLibro/" method="POST">
-          {% csrf_token %}
-          <label for="codigo">Código del libro:</label>
-          <input type="text" id="codigo" name="codigo">
-          <input type="submit" value="Buscar">
-        </form>
-      </div>
+
+      <form method="get">
+        <input type="text" name="codigo" placeholder="Ingrese el código del libro" required>
+        <input type="submit" value="Buscar">
+    </form>
+    
+    {% if libro %}
+        <h2>Detalles del libro:</h2>
+        <ul>
+            <li>
+                <strong>Código:</strong> {{ libro.Codigo }}<br>
+                <strong>Título:</strong> {{ libro.Titulo }}<br>
+                <strong>Autor:</strong> {{ libro.Autor }}<br>
+                <!-- Mostrar más campos si es necesario -->
+            </li>
+        </ul>
+    {% elif codigo_buscar %}
+        <p>No se encontró ningún libro con el código "{{ codigo_buscar }}".</p>
+    {% endif %}
+    
         {% for l in libros %}
           <tr>
             <td>{{l.Codigo}}</td>

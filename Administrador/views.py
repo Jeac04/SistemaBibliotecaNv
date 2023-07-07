@@ -7,6 +7,16 @@ from SistemadeGestiondeBiblioteca.decorators import  usuarios_permitidos, admin_
 def admin(request):
     return render(request, "panel.html")
 
+def busqueda(request):
+    codigo_buscar = request.GET.get('codigo')
+
+    try:
+        libro = Libro.objects.get(codigo=codigo_buscar)
+    except Libro.DoesNotExist:
+        libro = None
+
+    return render(request, 'libros.html', {'libro': libro, 'codigo_buscar': codigo_buscar})
+
 
 
 def users(request):

@@ -69,6 +69,15 @@
             <option>Vespertino</option>
           </select>
         </div>
+        <div class="col-1">
+          <label class="form-label" for="form3Example1c">Rol</label>
+          <select id="txtRol" name="txtRol" class="form-select">
+            <option selected>Elegir...</option>
+            <option>Estudiante</option>
+            <option>P.A</option>
+            <option>P.T.C</option>
+          </select>
+        </div>
         <div class="col-3">
           <label class="form-label" for="form3Example1c">Correo</label>
           <input type="text" name="txtCorreo" class="form-control">
@@ -100,6 +109,7 @@
         <th scope="col">Carrera</th>
         <th scope="col">Grupo</th>
         <th scope="col">Turno</th>
+        <th scope="col">Rol</th>
         <th scope="col">Cuatrimestre</th>
         <th scope="col">Opciones</th>
       </tr>
@@ -112,6 +122,7 @@
         <td>{{u.carrera}}</td>
         <td>{{u.grupo}}</td>
         <td>{{u.turno}}</td>
+        <td>{{u.rol}}</td>
         <td>{{u.cuatrimestre}}</td>
         <td><a href="{% url 'eliminarUsuario' id=u.id %}" class="btn btn-sm btn-danger">Eliminar</a></td>
 

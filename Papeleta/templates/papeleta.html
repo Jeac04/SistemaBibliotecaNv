@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-2">
         <label for="inputEmail4" class="form-label">Folio</label>
-        <input value="{{codigo}}" name="txtFolio" readonly="readonly" class="form-control"></input>
+        <input value="{{folio}}" name="txtFolio" readonly="readonly" class="form-control"></input>
       </div>
       <div class="col-11">
         <label for="inputAddress" class="form-label">Nombre del Solicitante</label>
@@ -38,12 +38,7 @@
       </div>
       <div class="col-md-2">
         <label for="inputState" class="form-label">Rol</label>
-        <select id="inputState" name="txtRol" class="form-select">
-          <option selected>Elegir...</option>
-          <option>Estudiante</option>
-          <option>P.A</option>
-          <option>P.T.C</option>
-        </select>
+        <input value="{{user.rol}}" name="txtRol" readonly="readonly" class="form-control"></input>
       </div>
       <div class="p-3 mb-2 bg-transparent text-body"></div>
     </div>
@@ -81,8 +76,8 @@
       </div>
       <div class="p-1 mb-2 bg-transparent text-body"></div>
       <div align="center" class="col-12">
-        <input type="submit" value="Generar Papeleta" name="Crear Papeleta">
-      </div>
+        
+        <button onclick="mostrarMensaje()">Generar Papeleta</button>
     </div>
 </form>
 </div>
