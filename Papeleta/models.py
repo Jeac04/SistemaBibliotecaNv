@@ -3,6 +3,7 @@ from datetime import datetime
 
 class PapeletaPrestamo(models.Model):
     folio = models.CharField(max_length=50, unique=True)
+    codigo_papeleta=models.CharField(max_length=10, unique=True)
     nombre_solicitante = models.CharField(max_length=100)
     matricula = models.CharField(max_length=20)
     ingenieria = models.CharField(max_length=70)

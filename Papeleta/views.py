@@ -5,6 +5,7 @@ from Papeleta.models import PapeletaPrestamo
 from Consulta.models import Libro
 from datetime import datetime, timedelta
 import shortuuid
+import random
 
 @usuarios_permitidos(allowed_roles=['Administrativos', 'Usuarios'])
 def fecha_actual(request):
@@ -33,8 +34,8 @@ def fecha_devolucion(request):
 
 @usuarios_permitidos(allowed_roles=['Administrativos', 'Usuarios'])
 def generar(request, id):
-    folio= 5
-    codigo= shortuuid.uuid()[:5]
+    n_random= random.randint(0, 9999)
+    folio = "23" + str(n_random).zfill(4)
     libro = Libro.objects.get(id=id)
     fecha_actual = datetime.now()
     fecha_nueva = fecha_actual.date()
@@ -45,17 +46,14 @@ def generar(request, id):
         'fecha_actual': fecha_nueva,
         'fechaDevolucion': fechaDevolucion,
         'folio': folio,
-        'codigo': codigo
     }
     print(libro)
     return render(request, "papeleta.html", context)
 
 @usuarios_permitidos(allowed_roles=['Administrativos', 'Usuarios'])
 def registrarPapeleta(request):
-    
     print(request)
-    
-
+    codigo_papeleta= shortuuid.uuid()[:5]
     folio=request.POST['txtFolio']
     nombre_solicitante=request.POST['txtNombre']
     matricula=request.POST['txtMatricula']
@@ -75,17 +73,24 @@ def registrarPapeleta(request):
     fecha_prestamo = datetime.strptime(fecha_prestamo, "%B %d, %Y").strftime("%Y-%m-%d")
     
     observaciones=request.POST['txtObservaciones']
-    
-    
-    
-
-        
-        
-    prestamosregistrados=PapeletaPrestamo.objects.create(folio=folio, nombre_solicitante=nombre_solicitante, matricula=matricula,
+     
+    prestamosregistrados=PapeletaPrestamo.objects.create(codigo_papeleta= codigo_papeleta, folio=folio, nombre_solicitante=nombre_solicitante, matricula=matricula,
         ingenieria=ingenieria, cuatrimestre=cuatrimestre, turno=turno, rol=rol, codigo=codigo, titulo=titulo, autor=autor,
         fecha_prestamo= fecha_prestamo, fecha_devolucion= fecha_devolucion, observaciones=observaciones)          
         
-    return render(request, 'papeleta.html')
-        
- 
+    return redirect('pagina_confirmacion', folio=folio, codigo_papeleta=codigo_papeleta)
+
+
+def paginaConfirmacion(request, folio, codigo_papeleta):
+    try:
+        papeleta = PapeletaPrestamo.objects.get(folio=folio, codigo_papeleta=codigo_papeleta)
+    except PapeletaPrestamo.DoesNotExist:
+        # Si no se encuentra la papeleta, puedes redirigir a una página de error o mostrar un mensaje de error
+        return redirect('pagina_error')
+    context= {
+       'papeleta' : papeleta 
+    }
+    
+    return render(request, 'confirmacion.html', context )
+
 
