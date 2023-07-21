@@ -1,0 +1,16 @@
+<h1>Confirmación de libros</h1>
+
+{% if libros %}
+  <form action="{% url generarprestamo %}" method="POST">
+    {% csrf_token %}
+    <h3>Libros seleccionados:</h3>
+    {% for libro in libros %}
+      <p>Título: {{libro.Nombre}}</p>
+      <p>Autor: {{libro.Autor}}</p>
+      <input type="hidden" name="libro_ids" value="{{ libro.id }}">
+    {% endfor %}
+    <input type="submit" value="Generar papeleta">
+  </form>
+{% else %}
+  <p>No se han seleccionado libros.</p>
+{% endif %}

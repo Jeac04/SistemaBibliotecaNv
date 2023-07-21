@@ -27,3 +27,22 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = Usuario
         fields = ('username', 'email', 'nombre', 'carrera', 'turno', 'grupo', 'cuatrimestre', 'rol', 'password1', 'password2')
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['carrera'].required = False
+        self.fields['turno'].required = False
+        self.fields['grupo'].required = False
+        self.fields['cuatrimestre'].required = False
+
+    def clean(self):
+        cleaned_data = super().clean()
+        rol = cleaned_data.get('rol')
+
+        if rol in ['P.A', 'P.T.C']:
+            cleaned_data['carrera'] = ''
+            cleaned_data['turno'] = ''
+            cleaned_data['grupo'] = ''
+            cleaned_data['cuatrimestre'] = ''
+
+        return cleaned_data

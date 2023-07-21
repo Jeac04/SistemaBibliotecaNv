@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from Consulta.models import Libro
 from Usuarios.models import Usuario
 from Papeleta.models import PapeletaPrestamo
+from django.core.paginator import Paginator
 from SistemadeGestiondeBiblioteca.decorators import  usuarios_permitidos, admin_only
 
 def admin(request):
@@ -18,12 +19,9 @@ def busqueda(request):
     return render(request, 'libros.html', {'libro': libro, 'codigo_buscar': codigo_buscar})
 
 
-
 def users(request):
     usuariosregistrados=Usuario.objects.all()
     return render(request, "usuarios.html", {"usuarios":usuariosregistrados})
-
-
 
 def registrarUsuario(request):
     username=request.POST['txtMatricula']
@@ -42,8 +40,6 @@ def registrarUsuario(request):
     
     return redirect ("usuarios/")
 
-
-
 def eliminarUsuario(request, id):
     usuario = Usuario.objects.get(id=id)
     context = {
@@ -52,12 +48,6 @@ def eliminarUsuario(request, id):
     usuario.delete()
 
     return redirect('/usuarios')
-
-
-
-def libros(request):
-    inventariolibros=Libro.objects.all().order_by('Codigo')
-    return render(request, "libros.html", {"libros": inventariolibros})
 
 
 def papeleta(request):
@@ -78,10 +68,18 @@ def anadirLibro(request):
     Ingenieria=request.POST['txtIngenieria']
     Descripcion=request.POST['txtDescripcion']
     
+    
     aLibros=Libro.objects.create(Codigo=Codigo, Isbn=Isbn, Nombre=Nombre, 
         Ejemplares=Ejemplares, Paginas=Paginas, Autor=Autor, Editorial=Editorial, Edicion=Edicion, Ingenieria=Ingenieria, Descripcion=Descripcion)
     return redirect ("libros/")
 
+def libros(request):
+    inventariolibros=Libro.objects.all().order_by('Codigo')
+    libros_por_pagina = 10
+    paginator = Paginator(inventariolibros, libros_por_pagina)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "libros.html", {'page_obj': page_obj})
 
 def eliminarLibro(request ,id):
     libro = Libro.objects.get(id=id)

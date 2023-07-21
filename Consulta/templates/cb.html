@@ -8,20 +8,21 @@
     <div class="p-3 mb-2 bg-transparent text-body"></div>
     <div class="album py-5 bg-light">
       <div class="container">
-        
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 
           {% for libro in libros %}
           <div class="col">
             <div class="card shadow-sm">
-              <img  src="{% static 'img/cb.png' %}"  width="100%" height="225">
+              <img src="{% static 'img/cb.png' %}" width="100%" height="225">
               <div class="card-body">
                 <h5>{{libro.Nombre}}</h5>
                 <p class="card-text"></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a class="btn btn-secondary" href="/cb1/{{libro.id}}" role="button">Ver</a>
-                    <a class="btn btn-secondary" href="/generarprestamo/{{libro.id}}" role="button">Solicitar</a>
+                    {% if libro.Ejemplares > 1 %}
+                      <a class="btn btn-secondary" href="/generarprestamo/{{libro.id}}" role="button">Solicitar</a>
+                    {% endif %}
                   </div>
                   <small class="text-muted"></small>
                 </div>
@@ -29,7 +30,6 @@
             </div>
           </div>
           {% endfor %}
-          </div>
         </div>
       </div>
     </div> 

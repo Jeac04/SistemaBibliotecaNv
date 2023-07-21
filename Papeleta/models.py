@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from Usuarios.models import Usuario
 
 class PapeletaPrestamo(models.Model):
     folio = models.CharField(max_length=50, unique=True)
@@ -16,3 +17,4 @@ class PapeletaPrestamo(models.Model):
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField(blank= True, null= True)
     observaciones = models.CharField(max_length=200)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)

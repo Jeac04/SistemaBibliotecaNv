@@ -21,7 +21,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a class="btn btn-secondary" href="/im1/{{libro.id}}" role="button">Ver</a>
-                    <a class="btn btn-secondary" href="/generarprestamo/{{libro.id}}" role="button">Solicitar</a>
+                    {% if libro.Ejemplares > 1 %}
+                      <a class="btn btn-secondary" href="/generarprestamo/{{libro.id}}" role="button">Solicitar</a>
+                    {% endif %}
                   </div>
                   <small class="text-muted"></small>
                 </div>

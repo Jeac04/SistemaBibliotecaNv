@@ -6,7 +6,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img  src="{% static 'img/cb1.png' %}" width="70%" height="600" ></div>
+            <div class="col-md-6"><img  src="{% static 'img/cb1.png' %}" width="90%" height="600" ></div>
             <div class="col-md-6" style="background-color:;">
                 <div class="small mb-1"></div>
                 <h1>{{libro.Nombre}}</h1>
@@ -15,12 +15,19 @@
                 <h4>Edición: {{libro.Edicion}}</h4>
                 <h4>Carrera: {{libro.Ingenieria}}</h4>
                 <h4>Ejemplares: {{libro.Ejemplares}}</h4>
+                <div class="p-3 mb-2 bg-transparent text-body"></div>
+                {% if libro.Ejemplares == 1 %}
+                    <div class="alert alert-warning" role="alert">
+                        <p>{{Mensaje}}<p>
+                    </div>
+                {% elif libro.Ejemplares > 1 %}
+                    <div class="d-flex">
+                        <a class="btn btn-secondary" href="{% url 'confirmar_libro' libro.id %}" role="button">Añadir papeleta</a>
+                    </div>
+                {% endif %}
                 <div class="fs-5 mb-5">
                 </div>
                 <p class="lead">{{libro.Descripcion}}</p>
-                <div class="d-flex">
-                    <a class="btn btn-secondary" href="{% url 'generarprestamo' id=libro.id %}" role="button">Añadir a la Papeleta</a>
-                </div>
                 <div class="p-3 mb-2 bg-transparent text-body"></div>
             </div>
         </div>

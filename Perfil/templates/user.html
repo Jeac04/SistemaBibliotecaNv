@@ -28,35 +28,33 @@
       <h3>Historial</h3>
     </div>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Folio</th>
-        <th scope="col">Titulo del Libro</th>
-        <th scope="col">Autor</th>
-        <th scope="col">Fecha de Prestamo</th>
-        <th scope="col">Fecha de Devolución</th>
-        <th scope="col">Estatus</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for p in papeleta %}
-          <tr>
-            <td>{{p.folio}}</td>
-            <td>{{p.titulo}}</td>
-            <td>{{p.autor}}</td>
-            <td>{{p.fecha_prestamo}}</td>
-            <td>{{p.fecha_devolucion}}</td>
-          </tr>
-        {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Folio</th>
+          <th scope="col">Titulo del Libro</th>
+          <th scope="col">Fecha de Prestamo</th>
+          <th scope="col">Fecha de Devolución</th>
+          <th scope="col">Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for p in papeleta %}
+            <tr>
+              <td>{{p.folio}}</td>
+              <td>{{p.titulo}}</td>
+              <td>{{p.fecha_prestamo}}</td>
+              <td>{{p.fecha_devolucion}}</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 
 {% else %}
 <p>Please login to see user detail.</p>
 {% endif %}
-
-
 
 {% endblock  %}

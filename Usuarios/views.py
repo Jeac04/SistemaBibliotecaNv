@@ -41,15 +41,15 @@ def loginUser(request):
                 return redirect('/')
         else: 
             context= {
-                'error' : 'La Matricula o la Contraseña son Incorrectos'
+                'error' : 'La Matrícula o la Contraseña son Incorrectos'
             }
             return render(request, 'login.html', context)
     else:  
         
         return render(request, 'login.html')
     
- 
 def logoutUser(request):
     logout(request)
     return redirect("/login")
+    
     

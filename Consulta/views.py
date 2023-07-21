@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from SistemadeGestiondeBiblioteca.decorators import usuarios_permitidos
 from Consulta.models import Libro
 
 @usuarios_permitidos(allowed_roles=['Administrativos', 'Usuarios'])
 def cb(request):
-    
     libros=Libro.objects.filter(Ingenieria='Ciencias Básicas')
     context= {'libros':libros}
     return render(request, "cb.html", context)
